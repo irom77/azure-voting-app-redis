@@ -23,7 +23,7 @@ pipeline {
          steps {
             sh(script: """
                docker-compose up -d
-               ./scripts/test_container.ps1
+               #./scripts/test_container.ps1
             """)
          }
          post {
@@ -38,7 +38,8 @@ pipeline {
       stage('Run Tests') {
          steps {
             sh(script: """
-               pytest ./tests/test_sample.py
+               cat ./tests/test_sample.py
+               #pytest ./tests/test_sample.py
             """)
          }
       }
@@ -69,57 +70,6 @@ pipeline {
             }
          }
       }
-      stage('Deploy to QA') {
-         environment {
-            ENVIRONMENT = 'qa'
-         }
-         steps {
-            echo "Deploying to ${ENVIRONMENT}"
-            acsDeploy(
-               azureCredentialsId: "jenkins_demo",
-               configFilePaths: "**/*.yaml",
-               containerService: "${ENVIRONMENT}-demo-cluster | AKS",
-               resourceGroupName: "${ENVIRONMENT}-demo",
-               sshCredentialsId: ""
-            )
-         }
-      }
-      stage('Approve PROD Deploy') {
-         when {
-            branch 'master'
-         }
-         options {
-            timeout(time: 1, unit: 'HOURS') 
-         }
-         steps {
-            input message: "Deploy?"
-         }
-         post {
-            success {
-               echo "Production Deploy Approved"
-            }
-            aborted {
-               echo "Production Deploy Denied"
-            }
-         }
-      }
-      stage('Deploy to PROD') {
-         when {
-            branch 'master'
-         }
-         environment {
-            ENVIRONMENT = 'prod'
-         }
-         steps {
-            echo "Deploying to ${ENVIRONMENT}"
-            acsDeploy(
-               azureCredentialsId: "jenkins_demo",
-               configFilePaths: "**/*.yaml",
-               containerService: "${ENVIRONMENT}-demo-cluster | AKS",
-               resourceGroupName: "${ENVIRONMENT}-demo",
-               sshCredentialsId: ""
-            )
-         }
-      }
+      
    }
 }
