@@ -25,17 +25,17 @@ pipeline {
          steps {
             sh(script: """
                docker-compose up -d
-               ./scripts/test_container.ps1
+               # ./scripts/test_container.ps1
             """)
          }
-         post {
+         /*post {
             success {
                echo "App started successfully :)"
             }
             failure {
                echo "App failed to start :("
             }
-         }
+         }*/
       }
       stage('Run Tests') {
          steps {
