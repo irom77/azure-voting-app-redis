@@ -41,8 +41,8 @@ pipeline {
          steps {
             sh(script: """
                # find / -name pytest -type f 2>/dev/null 
-               ls -l /var/lib/docker/overlay2/82951ae356e3c5e1a532626221454612eba6f6bd2f74a7f0014a351f345d45ee/diff/usr/local/bin/pytest
-               /var/lib/docker/overlay2/82951ae356e3c5e1a532626221454612eba6f6bd2f74a7f0014a351f345d45ee/diff/usr/local/bin/pytest ./tests/test_sample.py
+               which pytest
+               pytest ./tests/test_sample.py
             """)
          }
       }
