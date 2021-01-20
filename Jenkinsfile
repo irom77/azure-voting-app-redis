@@ -42,7 +42,7 @@ pipeline {
             sh(script: """
                # find / -name pytest -type f 2>/dev/null 
                which pytest
-               pytest ./tests/test_sample.py
+               # pytest ./tests/test_sample.py
             """)
          }
       }
