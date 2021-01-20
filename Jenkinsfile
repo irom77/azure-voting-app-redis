@@ -41,6 +41,7 @@ pipeline {
          steps {
             sh(script: """
                # find / -name pytest -type f 2>/dev/null 
+               ls -l /usr/local/bin/pytest
                /usr/local/bin/pytest ./tests/test_sample.py
             """)
          }
