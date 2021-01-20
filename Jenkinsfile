@@ -40,6 +40,7 @@ pipeline {
       stage('Run Tests') {
          steps {
             sh(script: """
+               which pytest
                pytest ./tests/test_sample.py
             """)
          }
