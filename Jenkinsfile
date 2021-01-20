@@ -41,7 +41,7 @@ pipeline {
          steps {
             sh(script: """
                # find / -name pytest -type f 2>/dev/null 
-               which pytest
+               cat ./tests/test_sample.py
                # pytest ./tests/test_sample.py
             """)
          }
