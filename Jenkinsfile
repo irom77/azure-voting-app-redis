@@ -40,8 +40,8 @@ pipeline {
       stage('Run Tests') {
          steps {
             sh(script: """
-               find / -name pytest -type f 2>/dev/null 
-               pytest ./tests/test_sample.py
+               # find / -name pytest -type f 2>/dev/null 
+               /usr/local/bin/pytest ./tests/test_sample.py
             """)
          }
       }
