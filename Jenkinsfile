@@ -58,6 +58,7 @@ pipeline {
                steps {
                   sh(script: """
                      echo "blackdentech/jenkins-course" > anchore_images
+                     cat ./anchore_images
                   """)
                   anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
                }
